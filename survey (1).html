@@ -125,12 +125,12 @@ const CONFIG = {
       id: "emin",
       title: "Опросник эмоционального интеллекта (ЭмИн)",
       instruction: "Оцените, насколько вы согласны с каждым утверждением.",
-      // Значения и подписи проверьте по руководству методики
+      // Значения 0-3 по руководству Люсина (нормы рассчитаны на эту шкалу)
       options: [
-        { v: 1, t: "Совсем не согласен" },
-        { v: 2, t: "Скорее не согласен" },
-        { v: 3, t: "Скорее согласен" },
-        { v: 4, t: "Полностью согласен" }
+        { v: 0, t: "Совсем не согласен" },
+        { v: 1, t: "Скорее не согласен" },
+        { v: 2, t: "Скорее согласен" },
+        { v: 3, t: "Полностью согласен" }
       ],
       items: [
         "Я замечаю, когда близкий человек переживает, даже если он (она) пытается это скрыть",
@@ -408,7 +408,7 @@ function showResults() {
 function payload() {
   const a = CONFIG.tests.map(t => t.id + ":" + answers[t.id].join(t.options.some(o => o.v > 9) ? "," : "")).join(";");
   const sc = resultRows.map(r => r.configured ? r.score : "").join(",");
-  return ["v1", profile.code, profile.age, profile.sex, profile.course, profile.spec].map(x => x || "").join("|") + "|S=" + sc + "|A=" + a;
+  return ["v2", profile.code, profile.age, profile.sex, profile.course, profile.spec].map(x => x || "").join("|") + "|S=" + sc + "|A=" + a;
 }
 
 function resultText() {
